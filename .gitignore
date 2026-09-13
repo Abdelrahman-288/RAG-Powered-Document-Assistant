@@ -1,8 +1,36 @@
+# Python virtual environment
 .venv/
+
+# Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Environment variables
 .env
+
+# Logs
 *.log
+
+# Jupyter
 .ipynb_checkpoints/
+
+# IDE
 .vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated vector database
 data/vector_store/
+
+# Python testing/cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build/package artifacts
+build/
+dist/
+*.egg-info/
