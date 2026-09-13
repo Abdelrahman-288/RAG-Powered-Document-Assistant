@@ -32,11 +32,23 @@ class RetrievalService:
         query: str,
         top_k: int = 5,
         category: str | None = None,
+        min_similarity: float | None = None,
     ) -> list[dict[str, Any]]:
         """
         Retrieve the most relevant chunks for a query.
 
-        Optionally restrict retrieval to a single category.
+        Args:
+            query:
+                User question.
+
+            top_k:
+                Maximum number of chunks to retrieve.
+
+            category:
+                Optional category filter.
+
+            min_similarity:
+                Optional minimum similarity threshold.
         """
 
         query_embedding = self.embedding_service.encode([query])[0]
@@ -67,13 +79,18 @@ class RetrievalService:
             zip(documents, metadatas, distances),
             start=1,
         ):
+            similarity = 1 - distance
+
+            if min_similarity is not None and similarity < min_similarity:
+                continue
+
             retrieved_chunks.append(
                 {
                     "rank": rank,
                     "text": document,
                     "metadata": metadata,
                     "distance": distance,
-                    "similarity": 1 - distance,
+                    "similarity": similarity,
                 }
             )
 

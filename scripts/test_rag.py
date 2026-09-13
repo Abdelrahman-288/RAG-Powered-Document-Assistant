@@ -11,54 +11,71 @@ VECTOR_STORE_DIR = PROJECT_ROOT / "data" / "vector_store"
 
 
 def main() -> None:
-    query = "What is overfitting in machine learning?"
+    print("=" * 70)
+    print("TechRAG Architect — Local RAG Test")
+    print("=" * 70)
 
-    print("\n=== USER QUESTION ===")
-    print(query)
+    print("\nLoading services...")
 
-    # 1. Load embedding model
     embedding_service = EmbeddingService()
 
-    # 2. Initialize retrieval
     retrieval_service = RetrievalService(
         persist_directory=VECTOR_STORE_DIR,
         embedding_service=embedding_service,
     )
 
-    # 3. Retrieve relevant document chunks
-    retrieved_chunks = retrieval_service.retrieve(
-        query=query,
-        top_k=5,
-        category="ai_ml",
-    )
-
-    print("\n=== RETRIEVED SOURCES ===")
-
-    for result in retrieved_chunks:
-        metadata = result["metadata"]
-
-        print(
-            f"- {metadata['document']} "
-            f"| Page {metadata['page']} "
-            f"| Similarity {result['similarity']:.4f}"
-        )
-
-    # 4. Build grounded prompt
-    prompt = build_rag_prompt(
-        query=query,
-        retrieved_chunks=retrieved_chunks,
-    )
-
-    # 5. Generate answer using Ollama
     generation_service = GenerationService(
         model_name="gemma3:4b",
     )
 
-    print("\n=== RAG ANSWER ===")
+    print("\nSystem ready.")
+    print("Type 'exit' or 'quit' to stop.\n")
 
-    answer = generation_service.generate(prompt)
+    while True:
+        query = input("You: ").strip()
 
-    print(answer)
+        if query.lower() in {"exit", "quit"}:
+            print("\nGoodbye.")
+            break
+
+        if not query:
+            continue
+
+        retrieved_chunks = retrieval_service.retrieve(
+            query=query,
+            top_k=5,
+            min_similarity=0.30,
+        )
+
+        print("\n=== RETRIEVED SOURCES ===")
+
+        if not retrieved_chunks:
+            print("No sufficiently relevant information was found.")
+            print(
+                "\nTechRAG: I don't have enough information "
+                "in the available documents to answer that question.\n"
+            )
+            continue
+
+        for result in retrieved_chunks:
+            metadata = result["metadata"]
+
+            print(
+                f"- {metadata['document']} "
+                f"| Page {metadata['page']} "
+                f"| Similarity {result['similarity']:.4f}"
+            )
+
+        prompt = build_rag_prompt(
+            query=query,
+            retrieved_chunks=retrieved_chunks,
+        )
+
+        answer = generation_service.generate(prompt)
+
+        print("\n=== ANSWER ===")
+        print(answer)
+        print()
 
 
 if __name__ == "__main__":
