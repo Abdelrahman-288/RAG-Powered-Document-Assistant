@@ -2,11 +2,15 @@ from pathlib import Path
 
 from src.ingestion.chunker import chunk_pages
 from src.ingestion.cleaner import clean_pages
+from src.ingestion.indexer import ChromaIndexer
 from src.ingestion.pdf_loader import load_all_pdfs
+from src.rag.embeddings import EmbeddingService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
 RAW_DATA_DIR = PROJECT_ROOT / "data" / "raw"
+VECTOR_STORE_DIR = PROJECT_ROOT / "data" / "vector_store"
 
 
 def main() -> None:
@@ -20,31 +24,31 @@ def main() -> None:
         chunk_overlap=200,
     )
 
-    print("\n=== SUMMARY ===")
+    print("\n=== INGESTION SUMMARY ===")
     print(f"Raw extracted pages: {len(pages)}")
     print(f"Cleaned pages: {len(cleaned_pages)}")
     print(f"Generated chunks: {len(chunks)}")
     print(f"Issues detected: {len(issues)}")
 
-    if chunks:
-        first_chunk = chunks[0]
+    if not chunks:
+        print("No chunks were generated. Nothing to index.")
+        return
 
-        print("\n=== FIRST CHUNK ===")
+    embedding_service = EmbeddingService()
 
-        print("ID:")
-        print(first_chunk["id"])
+    indexer = ChromaIndexer(
+        persist_directory=VECTOR_STORE_DIR,
+    )
 
-        print("\nMetadata:")
-        print(first_chunk["metadata"])
+    indexer.index_chunks(
+        chunks=chunks,
+        embedding_service=embedding_service,
+        batch_size=32,
+    )
 
-        print("\nText:")
-        print(first_chunk["text"])
-
-    if issues:
-        print("\n=== FIRST 10 ISSUES ===")
-
-        for issue in issues[:10]:
-            print(issue)
+    print("\n=== VECTOR STORE ===")
+    print(f"Stored chunks: {indexer.count()}")
+    print(f"Location: {VECTOR_STORE_DIR}")
 
 
 if __name__ == "__main__":
