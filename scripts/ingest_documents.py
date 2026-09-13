@@ -14,10 +14,13 @@ VECTOR_STORE_DIR = PROJECT_ROOT / "data" / "vector_store"
 
 
 def main() -> None:
+    # 1. Load PDFs
     pages, issues = load_all_pdfs(RAW_DATA_DIR)
 
+    # 2. Clean extracted text
     cleaned_pages = clean_pages(pages)
 
+    # 3. Create RAG chunks
     chunks = chunk_pages(
         pages=cleaned_pages,
         chunk_size=1200,
@@ -31,15 +34,18 @@ def main() -> None:
     print(f"Issues detected: {len(issues)}")
 
     if not chunks:
-        print("No chunks were generated. Nothing to index.")
+        print("\nNo chunks were generated. Nothing to index.")
         return
 
+    # 4. Load embedding model on CUDA
     embedding_service = EmbeddingService()
 
+    # 5. Connect to persistent ChromaDB
     indexer = ChromaIndexer(
         persist_directory=VECTOR_STORE_DIR,
     )
 
+    # 6. Generate embeddings and store everything
     indexer.index_chunks(
         chunks=chunks,
         embedding_service=embedding_service,
@@ -49,6 +55,10 @@ def main() -> None:
     print("\n=== VECTOR STORE ===")
     print(f"Stored chunks: {indexer.count()}")
     print(f"Location: {VECTOR_STORE_DIR}")
+
+    if issues:
+        print("\n=== DOCUMENT ISSUES ===")
+        print(f"{len(issues)} page(s) could not provide extractable text.")
 
 
 if __name__ == "__main__":

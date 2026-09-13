@@ -41,14 +41,14 @@ class ChromaIndexer:
         ids = [chunk["id"] for chunk in chunks]
         metadatas = [chunk["metadata"] for chunk in chunks]
 
-        print(f"Generating embeddings for {len(texts)} chunks...")
+        print(f"\nGenerating embeddings for {len(texts)} chunks...")
 
         embeddings = embedding_service.encode(
             texts,
             batch_size=batch_size,
         )
 
-        print("Saving embeddings to ChromaDB...")
+        print("\nSaving chunks and embeddings to ChromaDB...")
 
         self.collection.upsert(
             ids=ids,
