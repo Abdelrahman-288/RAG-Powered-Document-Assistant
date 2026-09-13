@@ -34,3 +34,9 @@ htmlcov/
 build/
 dist/
 *.egg-info/
+
+# Local knowledge-base documents
+data/raw/**/*.pdf
+data/raw/**/*.epub
+data/raw/**/*.docx
+data/raw/**/*.txt
