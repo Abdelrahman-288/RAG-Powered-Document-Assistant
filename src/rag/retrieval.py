@@ -9,6 +9,8 @@ from src.rag.reranker import RerankerService
 
 DEFAULT_COLLECTION_NAME = "techrag_documents"
 
+METADATA_BATCH_SIZE = 500
+
 
 class RetrievalService:
     def __init__(
@@ -34,9 +36,11 @@ class RetrievalService:
             collection_name
         )
 
-        self.client = chromadb.PersistentClient(
-            path=str(
-                self.persist_directory
+        self.client = (
+            chromadb.PersistentClient(
+                path=str(
+                    self.persist_directory
+                )
             )
         )
 
@@ -46,6 +50,9 @@ class RetrievalService:
             )
         )
 
+    # ==========================================================
+    # Retrieval
+    # ==========================================================
     def retrieve(
         self,
         query: str,
@@ -55,6 +62,7 @@ class RetrievalService:
         min_similarity: float | None = None,
         use_reranker: bool = True,
     ) -> list[dict[str, Any]]:
+
         query = query.strip()
 
         if not query:
@@ -84,37 +92,47 @@ class RetrievalService:
 
         search_k = (
             candidate_k
-            if use_reranker
-            and self.reranker_service
-            is not None
+            if (
+                use_reranker
+                and self.reranker_service
+                is not None
+            )
             else top_k
         )
 
-        results = self.collection.query(
-            query_embeddings=[
-                query_embedding.tolist()
-            ],
-            n_results=search_k,
-            where=where_filter,
-            include=[
-                "documents",
-                "metadatas",
-                "distances",
-            ],
+        results = (
+            self.collection.query(
+                query_embeddings=[
+                    query_embedding.tolist()
+                ],
+                n_results=search_k,
+                where=where_filter,
+                include=[
+                    "documents",
+                    "metadatas",
+                    "distances",
+                ],
+            )
         )
 
         documents = (
-            results.get("documents")
+            results.get(
+                "documents"
+            )
             or [[]]
         )[0]
 
         metadatas = (
-            results.get("metadatas")
+            results.get(
+                "metadatas"
+            )
             or [[]]
         )[0]
 
         distances = (
-            results.get("distances")
+            results.get(
+                "distances"
+            )
             or [[]]
         )[0]
 
@@ -134,26 +152,36 @@ class RetrievalService:
             ),
             start=1,
         ):
+
             similarity = (
-                1.0 - float(distance)
+                1.0 -
+                float(distance)
             )
 
             if (
                 min_similarity
                 is not None
-                and similarity
-                < min_similarity
+                and similarity <
+                min_similarity
             ):
                 continue
 
             candidates.append(
                 {
-                    "rank": rank,
-                    "text": document,
-                    "metadata": metadata,
-                    "distance": float(
-                        distance
-                    ),
+                    "rank":
+                        rank,
+
+                    "text":
+                        document,
+
+                    "metadata":
+                        metadata,
+
+                    "distance":
+                        float(
+                            distance
+                        ),
+
                     "similarity":
                         similarity,
                 }
@@ -164,34 +192,108 @@ class RetrievalService:
             and self.reranker_service
             is not None
         ):
+
             return (
-                self.reranker_service.rerank(
+                self
+                .reranker_service
+                .rerank(
                     query=query,
                     candidates=candidates,
                     top_k=top_k,
                 )
             )
 
-        return candidates[:top_k]
+        return (
+            candidates[
+                :top_k
+            ]
+        )
 
-    def count(self) -> int:
-        return self.collection.count()
+    # ==========================================================
+    # Collection count
+    # ==========================================================
+    def count(
+        self,
+    ) -> int:
 
+        return (
+            self.collection.count()
+        )
+
+    # ==========================================================
+    # Safe batched metadata iterator
+    # ==========================================================
+    def iter_metadatas(
+        self,
+        batch_size: int = METADATA_BATCH_SIZE,
+    ):
+        """
+        Safely yield Chroma metadata in batches.
+
+        Avoids loading tens of thousands of rows
+        in one SQLite query.
+        """
+
+        if batch_size <= 0:
+            raise ValueError(
+                "batch_size must be greater than 0."
+            )
+
+        total = (
+            self.collection.count()
+        )
+
+        offset = 0
+
+        while offset < total:
+
+            result = (
+                self.collection.get(
+                    limit=batch_size,
+                    offset=offset,
+                    include=[
+                        "metadatas"
+                    ],
+                )
+            )
+
+            metadatas = (
+                result.get(
+                    "metadatas"
+                )
+                or []
+            )
+
+            if not metadatas:
+                break
+
+            for metadata in metadatas:
+                if metadata:
+                    yield metadata
+
+            offset += len(
+                metadatas
+            )
+
+    # ==========================================================
+    # Categories
+    # ==========================================================
     def get_categories(
         self,
     ) -> list[str]:
-        results = self.collection.get(
-            include=["metadatas"]
+
+        categories: set[str] = (
+            set()
         )
 
-        categories = set()
-
         for metadata in (
-            results.get("metadatas")
-            or []
+            self.iter_metadatas()
         ):
-            category = metadata.get(
-                "category"
+
+            category = (
+                metadata.get(
+                    "category"
+                )
             )
 
             if category:
@@ -199,4 +301,6 @@ class RetrievalService:
                     str(category)
                 )
 
-        return sorted(categories)
+        return sorted(
+            categories
+        )

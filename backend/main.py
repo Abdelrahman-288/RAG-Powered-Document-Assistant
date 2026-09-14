@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.schemas import (
     HealthResponse,
+    KnowledgeBaseResponse,
     QueryRequest,
     QueryResponse,
     StatsResponse,
@@ -107,7 +108,37 @@ def stats() -> StatsResponse:
         reranker_enabled=stats_data[
             "reranker_enabled"
         ],
+        reranker_model=stats_data[
+            "reranker_model"
+        ],
     )
+
+
+@app.get(
+    "/knowledge-base",
+    response_model=KnowledgeBaseResponse,
+)
+def knowledge_base() -> KnowledgeBaseResponse:
+    if rag_service is None:
+        raise HTTPException(
+            status_code=503,
+            detail="RAG service is not ready.",
+        )
+
+    try:
+        result = (
+            rag_service.get_knowledge_base()
+        )
+
+        return KnowledgeBaseResponse(
+            **result
+        )
+
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=str(exc),
+        ) from exc
 
 
 @app.post(

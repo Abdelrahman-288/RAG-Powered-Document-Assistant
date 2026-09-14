@@ -1,94 +1,347 @@
 {
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\ai_ml\\Machine-Learning-With-PyTorch-and-Scikit-Learn.pdf": {
-    "size": 30745878,
-    "modified_time": 1779839121.2542655
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\algorithms_data_structures\\Cormen Introduction to Algorithms.pdf": {
-    "size": 5726585,
-    "modified_time": 1779838530.653346
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\algorithms_data_structures\\Grokking Algorithms 2nd Edition.pdf": {
-    "size": 2998611,
-    "modified_time": 1779838703.495206
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\blackhatpython.pdf": {
-    "size": 6871913,
-    "modified_time": 1779839416.4115994
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\Dafydd Stuttard, Marcus Pinto - The web application hacker's handbook_ finding and exploiting security flaws-Wiley (2011).pdf": {
-    "size": 15379670,
-    "modified_time": 1715463469.0300324
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\Hacking- The Art of Exploitation (2nd ed. 2008) - Erickson.pdf": {
-    "size": 4565121,
-    "modified_time": 1701541512.9297104
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\Penetration Testing - 3 Manuscripts\u2014Wireless Hacking, Tor and the Dark Net, and Powershell by Logan Styles.pdf": {
-    "size": 1783540,
-    "modified_time": 1701541706.8208935
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\Penetration Testing - A hands-on introduction to Hacking.pdf": {
-    "size": 12790301,
-    "modified_time": 1701541678.9650383
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\The Web Application Hacker's Handbook - Finding and Exploiting Security Flaws, 2nd Edition by Dafydd Stuttard, Marcus Pinto.pdf": {
-    "size": 14171674,
-    "modified_time": 1779839412.1251466
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\cybersecurity\\Web Hacking 101 - How to Make Money Hacking Ethically by Peter Yaworski.pdf": {
-    "size": 9828350,
-    "modified_time": 1715463338.9932475
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\data_science\\Fundamentals of Data Engineering (Reis, JoeHousley, Matt) (Z-Library).pdf": {
-    "size": 8806461,
-    "modified_time": 1786442132.957688
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\data_science\\Python Data Science Handbook.pdf": {
-    "size": 22321280,
-    "modified_time": 1786448346.6503375
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\data_science\\Python-for-Data-Analysis.pdf": {
-    "size": 9384476,
-    "modified_time": 1786448371.3216026
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\malware_analysis\\practicalmalwareanalysis.pdf": {
-    "size": 10010878,
-    "modified_time": 1779839412.6021307
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Automate The Boring Stuff With Python_new.pdf": {
-    "size": 14880335,
-    "modified_time": 1779838365.1594937
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Clean Code.pdf": {
-    "size": 3077897,
-    "modified_time": 1779838444.07103
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Doing Math With Python.pdf": {
-    "size": 6978480,
-    "modified_time": 1780231468.706515
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Fluent Python.pdf": {
-    "size": 16456139,
-    "modified_time": 1779838799.3196423
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Python Cookbook.pdf": {
-    "size": 1631734,
-    "modified_time": 1779838919.4417026
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Python Crash Course.pdf": {
-    "size": 5641523,
-    "modified_time": 1779838390.4676845
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\pythonplayground_geekyprojectsforthecuriousprogrammer.pdf": {
-    "size": 12383854,
-    "modified_time": 1780231545.9438329
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Serious Python.pdf": {
-    "size": 4569996,
-    "modified_time": 1779839404.238907
-  },
-  "C:\\Users\\abdel\\OneDrive\\Desktop\\RAG-Powered Document\\data\\raw\\python\\Think Python 2nd Edition.pdf": {
-    "size": 4410735,
-    "modified_time": 1779838455.1942163
+  "version": 2,
+  "files": {
+    "ai_ml/Foundations of Machine Learning.pdf": {
+      "signature": {
+        "size": 6224448,
+        "modified_time_ns": 1769613308049330100
+      },
+      "document": "Foundations of Machine Learning.pdf",
+      "category": "ai_ml",
+      "relative_path": "ai_ml/Foundations of Machine Learning.pdf"
+    },
+    "ai_ml/Machine-Learning-With-PyTorch-and-Scikit-Learn.pdf": {
+      "signature": {
+        "size": 30745878,
+        "modified_time_ns": 1779839121254265600
+      },
+      "document": "Machine-Learning-With-PyTorch-and-Scikit-Learn.pdf",
+      "category": "ai_ml",
+      "relative_path": "ai_ml/Machine-Learning-With-PyTorch-and-Scikit-Learn.pdf"
+    },
+    "algorithms_data_structures/Cormen Introduction to Algorithms.pdf": {
+      "signature": {
+        "size": 5726585,
+        "modified_time_ns": 1779838530653346000
+      },
+      "document": "Cormen Introduction to Algorithms.pdf",
+      "category": "algorithms_data_structures",
+      "relative_path": "algorithms_data_structures/Cormen Introduction to Algorithms.pdf"
+    },
+    "algorithms_data_structures/Grokking Algorithms 2nd Edition.pdf": {
+      "signature": {
+        "size": 2998611,
+        "modified_time_ns": 1779838703495206000
+      },
+      "document": "Grokking Algorithms 2nd Edition.pdf",
+      "category": "algorithms_data_structures",
+      "relative_path": "algorithms_data_structures/Grokking Algorithms 2nd Edition.pdf"
+    },
+    "cloud_security/Securing_the_Cloud.pdf": {
+      "signature": {
+        "size": 3574699,
+        "modified_time_ns": 1727306731903331800
+      },
+      "document": "Securing_the_Cloud.pdf",
+      "category": "cloud_security",
+      "relative_path": "cloud_security/Securing_the_Cloud.pdf"
+    },
+    "computer_vision/OpenCv Computer Vision Projects with Python.pdf": {
+      "signature": {
+        "size": 14217374,
+        "modified_time_ns": 1779839481921957500
+      },
+      "document": "OpenCv Computer Vision Projects with Python.pdf",
+      "category": "computer_vision",
+      "relative_path": "computer_vision/OpenCv Computer Vision Projects with Python.pdf"
+    },
+    "computer_vision/Pattern Recognition and Machine Learning.pdf": {
+      "signature": {
+        "size": 18090775,
+        "modified_time_ns": 1767365802706898600
+      },
+      "document": "Pattern Recognition and Machine Learning.pdf",
+      "category": "computer_vision",
+      "relative_path": "computer_vision/Pattern Recognition and Machine Learning.pdf"
+    },
+    "computer_vision/Practical Python and OpenCV, 3rd Edition.pdf": {
+      "signature": {
+        "size": 8816882,
+        "modified_time_ns": 1779839376828801700
+      },
+      "document": "Practical Python and OpenCV, 3rd Edition.pdf",
+      "category": "computer_vision",
+      "relative_path": "computer_vision/Practical Python and OpenCV, 3rd Edition.pdf"
+    },
+    "computer_vision/ProgrammingComputerVision_CCdraft.pdf": {
+      "signature": {
+        "size": 14290070,
+        "modified_time_ns": 1779839280974924100
+      },
+      "document": "ProgrammingComputerVision_CCdraft.pdf",
+      "category": "computer_vision",
+      "relative_path": "computer_vision/ProgrammingComputerVision_CCdraft.pdf"
+    },
+    "cybersecurity/blackhatpython.pdf": {
+      "signature": {
+        "size": 6871913,
+        "modified_time_ns": 1779839416411599300
+      },
+      "document": "blackhatpython.pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/blackhatpython.pdf"
+    },
+    "cybersecurity/Dafydd Stuttard, Marcus Pinto - The web application hacker's handbook_ finding and exploiting security flaws-Wiley (2011).pdf": {
+      "signature": {
+        "size": 15379670,
+        "modified_time_ns": 1715463469030032300
+      },
+      "document": "Dafydd Stuttard, Marcus Pinto - The web application hacker's handbook_ finding and exploiting security flaws-Wiley (2011).pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/Dafydd Stuttard, Marcus Pinto - The web application hacker's handbook_ finding and exploiting security flaws-Wiley (2011).pdf"
+    },
+    "cybersecurity/Hacking- The Art of Exploitation (2nd ed. 2008) - Erickson.pdf": {
+      "signature": {
+        "size": 4565121,
+        "modified_time_ns": 1701541512929710300
+      },
+      "document": "Hacking- The Art of Exploitation (2nd ed. 2008) - Erickson.pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/Hacking- The Art of Exploitation (2nd ed. 2008) - Erickson.pdf"
+    },
+    "cybersecurity/Penetration Testing - 3 Manuscripts—Wireless Hacking, Tor and the Dark Net, and Powershell by Logan Styles.pdf": {
+      "signature": {
+        "size": 1783540,
+        "modified_time_ns": 1701541706820893600
+      },
+      "document": "Penetration Testing - 3 Manuscripts—Wireless Hacking, Tor and the Dark Net, and Powershell by Logan Styles.pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/Penetration Testing - 3 Manuscripts—Wireless Hacking, Tor and the Dark Net, and Powershell by Logan Styles.pdf"
+    },
+    "cybersecurity/Penetration Testing - A hands-on introduction to Hacking.pdf": {
+      "signature": {
+        "size": 12790301,
+        "modified_time_ns": 1701541678965038300
+      },
+      "document": "Penetration Testing - A hands-on introduction to Hacking.pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/Penetration Testing - A hands-on introduction to Hacking.pdf"
+    },
+    "cybersecurity/The Web Application Hacker's Handbook - Finding and Exploiting Security Flaws, 2nd Edition by Dafydd Stuttard, Marcus Pinto.pdf": {
+      "signature": {
+        "size": 14171674,
+        "modified_time_ns": 1779839412125146600
+      },
+      "document": "The Web Application Hacker's Handbook - Finding and Exploiting Security Flaws, 2nd Edition by Dafydd Stuttard, Marcus Pinto.pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/The Web Application Hacker's Handbook - Finding and Exploiting Security Flaws, 2nd Edition by Dafydd Stuttard, Marcus Pinto.pdf"
+    },
+    "cybersecurity/Web Hacking 101 - How to Make Money Hacking Ethically by Peter Yaworski.pdf": {
+      "signature": {
+        "size": 9828350,
+        "modified_time_ns": 1715463338993247400
+      },
+      "document": "Web Hacking 101 - How to Make Money Hacking Ethically by Peter Yaworski.pdf",
+      "category": "cybersecurity",
+      "relative_path": "cybersecurity/Web Hacking 101 - How to Make Money Hacking Ethically by Peter Yaworski.pdf"
+    },
+    "data_science/Fundamentals of Data Engineering (Reis, JoeHousley, Matt) (Z-Library).pdf": {
+      "signature": {
+        "size": 8806461,
+        "modified_time_ns": 1786442132957688100
+      },
+      "document": "Fundamentals of Data Engineering (Reis, JoeHousley, Matt) (Z-Library).pdf",
+      "category": "data_science",
+      "relative_path": "data_science/Fundamentals of Data Engineering (Reis, JoeHousley, Matt) (Z-Library).pdf"
+    },
+    "data_science/Python Data Science Handbook.pdf": {
+      "signature": {
+        "size": 22321280,
+        "modified_time_ns": 1786448346650337500
+      },
+      "document": "Python Data Science Handbook.pdf",
+      "category": "data_science",
+      "relative_path": "data_science/Python Data Science Handbook.pdf"
+    },
+    "data_science/Python-for-Data-Analysis.pdf": {
+      "signature": {
+        "size": 9384476,
+        "modified_time_ns": 1786448371321602500
+      },
+      "document": "Python-for-Data-Analysis.pdf",
+      "category": "data_science",
+      "relative_path": "data_science/Python-for-Data-Analysis.pdf"
+    },
+    "deep_learning/Deep Learning For Computer Vision.pdf": {
+      "signature": {
+        "size": 27660308,
+        "modified_time_ns": 1779839367274081300
+      },
+      "document": "Deep Learning For Computer Vision.pdf",
+      "category": "deep_learning",
+      "relative_path": "deep_learning/Deep Learning For Computer Vision.pdf"
+    },
+    "deep_learning/Deep Learning Foundations and Concepts (Christopher Bishop  Hugh Bishop).pdf": {
+      "signature": {
+        "size": 49575812,
+        "modified_time_ns": 1780013173993255500
+      },
+      "document": "Deep Learning Foundations and Concepts (Christopher Bishop  Hugh Bishop).pdf",
+      "category": "deep_learning",
+      "relative_path": "deep_learning/Deep Learning Foundations and Concepts (Christopher Bishop  Hugh Bishop).pdf"
+    },
+    "deep_learning/Deep Learning Ian Goodfellow.pdf": {
+      "signature": {
+        "size": 19284030,
+        "modified_time_ns": 1759485466426290800
+      },
+      "document": "Deep Learning Ian Goodfellow.pdf",
+      "category": "deep_learning",
+      "relative_path": "deep_learning/Deep Learning Ian Goodfellow.pdf"
+    },
+    "deep_learning/Deep Learning with Python.pdf": {
+      "signature": {
+        "size": 11437542,
+        "modified_time_ns": 1779839175945699900
+      },
+      "document": "Deep Learning with Python.pdf",
+      "category": "deep_learning",
+      "relative_path": "deep_learning/Deep Learning with Python.pdf"
+    },
+    "deep_learning/Programming PyTorch for Deep Learning.pdf": {
+      "signature": {
+        "size": 7192319,
+        "modified_time_ns": 1779839179632860300
+      },
+      "document": "Programming PyTorch for Deep Learning.pdf",
+      "category": "deep_learning",
+      "relative_path": "deep_learning/Programming PyTorch for Deep Learning.pdf"
+    },
+    "deep_learning/UnderstandingDeepLearning_02_09_26_C.pdf": {
+      "signature": {
+        "size": 22344992,
+        "modified_time_ns": 1772321581394824800
+      },
+      "document": "UnderstandingDeepLearning_02_09_26_C.pdf",
+      "category": "deep_learning",
+      "relative_path": "deep_learning/UnderstandingDeepLearning_02_09_26_C.pdf"
+    },
+    "embedded_systems/Embedded  System Design.pdf": {
+      "signature": {
+        "size": 12163408,
+        "modified_time_ns": 1780996144215377500
+      },
+      "document": "Embedded  System Design.pdf",
+      "category": "embedded_systems",
+      "relative_path": "embedded_systems/Embedded  System Design.pdf"
+    },
+    "llm/LLM-Engineers-Handbook.pdf": {
+      "signature": {
+        "size": 20601793,
+        "modified_time_ns": 1780012982020257400
+      },
+      "document": "LLM-Engineers-Handbook.pdf",
+      "category": "llm",
+      "relative_path": "llm/LLM-Engineers-Handbook.pdf"
+    },
+    "malware_analysis/practicalmalwareanalysis.pdf": {
+      "signature": {
+        "size": 10010878,
+        "modified_time_ns": 1779839412602130700
+      },
+      "document": "practicalmalwareanalysis.pdf",
+      "category": "malware_analysis",
+      "relative_path": "malware_analysis/practicalmalwareanalysis.pdf"
+    },
+    "nlp/Natural Language Processing with Transformers.pdf": {
+      "signature": {
+        "size": 12769913,
+        "modified_time_ns": 1779839474523763200
+      },
+      "document": "Natural Language Processing with Transformers.pdf",
+      "category": "nlp",
+      "relative_path": "nlp/Natural Language Processing with Transformers.pdf"
+    },
+    "python/Automate The Boring Stuff With Python_new.pdf": {
+      "signature": {
+        "size": 14880335,
+        "modified_time_ns": 1779838365159493800
+      },
+      "document": "Automate The Boring Stuff With Python_new.pdf",
+      "category": "python",
+      "relative_path": "python/Automate The Boring Stuff With Python_new.pdf"
+    },
+    "python/Clean Code.pdf": {
+      "signature": {
+        "size": 3077897,
+        "modified_time_ns": 1779838444071029800
+      },
+      "document": "Clean Code.pdf",
+      "category": "python",
+      "relative_path": "python/Clean Code.pdf"
+    },
+    "python/Doing Math With Python.pdf": {
+      "signature": {
+        "size": 6978480,
+        "modified_time_ns": 1780231468706515100
+      },
+      "document": "Doing Math With Python.pdf",
+      "category": "python",
+      "relative_path": "python/Doing Math With Python.pdf"
+    },
+    "python/Fluent Python.pdf": {
+      "signature": {
+        "size": 16456139,
+        "modified_time_ns": 1779838799319642200
+      },
+      "document": "Fluent Python.pdf",
+      "category": "python",
+      "relative_path": "python/Fluent Python.pdf"
+    },
+    "python/Python Cookbook.pdf": {
+      "signature": {
+        "size": 1631734,
+        "modified_time_ns": 1779838919441702700
+      },
+      "document": "Python Cookbook.pdf",
+      "category": "python",
+      "relative_path": "python/Python Cookbook.pdf"
+    },
+    "python/Python Crash Course.pdf": {
+      "signature": {
+        "size": 5641523,
+        "modified_time_ns": 1779838390467684400
+      },
+      "document": "Python Crash Course.pdf",
+      "category": "python",
+      "relative_path": "python/Python Crash Course.pdf"
+    },
+    "python/pythonplayground_geekyprojectsforthecuriousprogrammer.pdf": {
+      "signature": {
+        "size": 12383854,
+        "modified_time_ns": 1780231545943832800
+      },
+      "document": "pythonplayground_geekyprojectsforthecuriousprogrammer.pdf",
+      "category": "python",
+      "relative_path": "python/pythonplayground_geekyprojectsforthecuriousprogrammer.pdf"
+    },
+    "python/Serious Python.pdf": {
+      "signature": {
+        "size": 4569996,
+        "modified_time_ns": 1779839404238907000
+      },
+      "document": "Serious Python.pdf",
+      "category": "python",
+      "relative_path": "python/Serious Python.pdf"
+    },
+    "python/Think Python 2nd Edition.pdf": {
+      "signature": {
+        "size": 4410735,
+        "modified_time_ns": 1779838455194216200
+      },
+      "document": "Think Python 2nd Edition.pdf",
+      "category": "python",
+      "relative_path": "python/Think Python 2nd Edition.pdf"
+    }
   }
 }
