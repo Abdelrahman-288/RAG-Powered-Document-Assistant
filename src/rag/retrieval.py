@@ -4,6 +4,7 @@ from typing import Any
 import chromadb
 
 from src.rag.embeddings import EmbeddingService
+from src.rag.reranker import RerankerService
 
 
 DEFAULT_COLLECTION_NAME = "techrag_documents"
@@ -14,53 +15,86 @@ class RetrievalService:
         self,
         persist_directory: str | Path,
         embedding_service: EmbeddingService,
+        reranker_service: RerankerService | None = None,
         collection_name: str = DEFAULT_COLLECTION_NAME,
     ) -> None:
-        self.persist_directory = Path(persist_directory)
-        self.embedding_service = embedding_service
-
-        self.client = chromadb.PersistentClient(
-            path=str(self.persist_directory)
+        self.persist_directory = Path(
+            persist_directory
         )
 
-        self.collection = self.client.get_collection(
-            name=collection_name
+        self.embedding_service = (
+            embedding_service
+        )
+
+        self.reranker_service = (
+            reranker_service
+        )
+
+        self.collection_name = (
+            collection_name
+        )
+
+        self.client = chromadb.PersistentClient(
+            path=str(
+                self.persist_directory
+            )
+        )
+
+        self.collection = (
+            self.client.get_collection(
+                name=self.collection_name
+            )
         )
 
     def retrieve(
         self,
         query: str,
         top_k: int = 5,
+        candidate_k: int = 15,
         category: str | None = None,
         min_similarity: float | None = None,
+        use_reranker: bool = True,
     ) -> list[dict[str, Any]]:
-        """
-        Retrieve the most relevant chunks for a query.
+        query = query.strip()
 
-        Args:
-            query:
-                User question.
+        if not query:
+            return []
 
-            top_k:
-                Maximum number of chunks to retrieve.
+        if top_k <= 0:
+            raise ValueError(
+                "top_k must be greater than 0."
+            )
 
-            category:
-                Optional category filter.
+        if candidate_k < top_k:
+            candidate_k = top_k
 
-            min_similarity:
-                Optional minimum similarity threshold.
-        """
-
-        query_embedding = self.embedding_service.encode([query])[0]
+        query_embedding = (
+            self.embedding_service.encode(
+                [query],
+                show_progress_bar=False,
+            )[0]
+        )
 
         where_filter = None
 
         if category is not None:
-            where_filter = {"category": category}
+            where_filter = {
+                "category": category
+            }
+
+        search_k = (
+            candidate_k
+            if use_reranker
+            and self.reranker_service
+            is not None
+            else top_k
+        )
 
         results = self.collection.query(
-            query_embeddings=[query_embedding.tolist()],
-            n_results=top_k,
+            query_embeddings=[
+                query_embedding.tolist()
+            ],
+            n_results=search_k,
             where=where_filter,
             include=[
                 "documents",
@@ -69,29 +103,100 @@ class RetrievalService:
             ],
         )
 
-        retrieved_chunks: list[dict[str, Any]] = []
+        documents = (
+            results.get("documents")
+            or [[]]
+        )[0]
 
-        documents = results["documents"][0]
-        metadatas = results["metadatas"][0]
-        distances = results["distances"][0]
+        metadatas = (
+            results.get("metadatas")
+            or [[]]
+        )[0]
 
-        for rank, (document, metadata, distance) in enumerate(
-            zip(documents, metadatas, distances),
+        distances = (
+            results.get("distances")
+            or [[]]
+        )[0]
+
+        candidates: list[
+            dict[str, Any]
+        ] = []
+
+        for rank, (
+            document,
+            metadata,
+            distance,
+        ) in enumerate(
+            zip(
+                documents,
+                metadatas,
+                distances,
+            ),
             start=1,
         ):
-            similarity = 1 - distance
+            similarity = (
+                1.0 - float(distance)
+            )
 
-            if min_similarity is not None and similarity < min_similarity:
+            if (
+                min_similarity
+                is not None
+                and similarity
+                < min_similarity
+            ):
                 continue
 
-            retrieved_chunks.append(
+            candidates.append(
                 {
                     "rank": rank,
                     "text": document,
                     "metadata": metadata,
-                    "distance": distance,
-                    "similarity": similarity,
+                    "distance": float(
+                        distance
+                    ),
+                    "similarity":
+                        similarity,
                 }
             )
 
-        return retrieved_chunks
+        if (
+            use_reranker
+            and self.reranker_service
+            is not None
+        ):
+            return (
+                self.reranker_service.rerank(
+                    query=query,
+                    candidates=candidates,
+                    top_k=top_k,
+                )
+            )
+
+        return candidates[:top_k]
+
+    def count(self) -> int:
+        return self.collection.count()
+
+    def get_categories(
+        self,
+    ) -> list[str]:
+        results = self.collection.get(
+            include=["metadatas"]
+        )
+
+        categories = set()
+
+        for metadata in (
+            results.get("metadatas")
+            or []
+        ):
+            category = metadata.get(
+                "category"
+            )
+
+            if category:
+                categories.add(
+                    str(category)
+                )
+
+        return sorted(categories)
